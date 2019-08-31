@@ -1,0 +1,142 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nithil's Blog</title>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"/>
+    
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/slicknav.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/owl.carousel.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/magnific-popup.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/animate.css' %}"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="{% static 'blog/css/style.css' %}"/>
+
+</head>
+<body>
+
+<!-- Page Preloder 
+<div id="preloder">
+    <div class="loader"></div>
+</div>-->
+
+<!-- Header section -->
+<header class="header-section">
+    <div class="header-warp">
+        <div class="header-social d-flex justify-content-end">
+                <a class="navbar-brand" href="{% url 'blog:home' %}">Nithil's Blog</a>
+        </div>
+        <div class="header-bar-warp d-flex">
+            <!-- site logo -->
+            <a href="{% url 'blog:home' %}" class="site-logo">
+                <img src="{% static 'blog/img/logo.png' %}" height="60px" width="120px" alt="NithilLOGO">
+            </a>
+            <nav class="top-nav-area w-100">
+                <div class="user-panel">
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}">Register/</a>
+                    {% endif %} 
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}">Login</a> 
+                    {% endif %}
+                </div>
+                <!-- Menu -->
+                <ul class="main-menu primary-menu">
+                        {% if user.is_authenticated %}
+                    <li><a href="{% url 'blog:home' %}">Home</a></li>
+                    <li><a href="{% url 'blog:user_posts' user.username %}">My Blog</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'blog:create_post' %}">New Post</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'profile' %}">My Profile</a></li>
+                    <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- Header section end -->
+	<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="{% static 'blog/img/page-top-bg/3.jpg' %}">
+		<div class="page-info">
+			<h2>Nithil's Blog</h2>
+			<div class="site-breadcrumb">
+				<a href="{% url 'blog:home' %}">Home</a>
+			</div>
+		</div>
+    </section>
+<hr>
+	<!-- Page top end-->
+<div id="content" class = "container">
+    {% block content %}{% endblock %}
+</div>
+
+<hr>
+<div class="mt-5 pt-5 pb-5 footer set-bg" data-setbg="{% static 'blog/img/page-top-bg/3.jpg' %}" >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5 col-xs-12 about-company">
+              <h2>Nithil's BLOG</h2>
+              <p class="pr-5 text-white-50">Developed by Nithil.A.S,Prodapt Solutions. </p>
+              <p><a href="https://fb.com/"><i class="fa fa-facebook-square mr-1"></i></a><a href="https://in.linkedin.com/in/nithil-a-s"><i class="fa fa-linkedin-square"></i></a></p>
+            </div>
+            <div class="col-lg-3 col-xs-12 links">
+                <!-- Logged user info -->
+            {% if user.is_authenticated %}
+            <p class="text-center">
+                | Logged user: {{ user.username }}
+                | Email: {{ user.email }}
+                | Admin:{{ user.is_superuser }}
+                | <a href="{% url 'logout' %}">Sign Out</a>
+            </p>
+        {% endif %}
+            </div>
+            <div class="col-lg-4 col-xs-12 location">
+              <h4 class="mt-lg-0 mt-sm-4">Location</h4>
+              <p>22,Talking Technologies,Kilpauk,Chennai.</p>
+              <p class="mb-0"><i class="fa fa-phone mr-3"></i>(+91)99622 99622</p>
+              <p><i class="fa fa-envelope-o mr-3"></i>info.ntl@myblog.com</p>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col copyright">
+              <p class="" style="background-color:black"><small class="text-white-50">© 2019. by Nithil A.S.</small></p>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+<!-- footer -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</div>
+
+</body>
+<script src="{% static 'blog/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'blog/js/main.js' %}"></script>
+</html>

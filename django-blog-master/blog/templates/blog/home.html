@@ -1,0 +1,127 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+{% load static%}
+<head>
+        <link rel="stylesheet" href="{% static 'blog/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/ionicons.css' %}"/>
+        <link rel="stylesheet" href="{% static 'blog/css/swiper.css' %}"/>
+        <link rel="stylesheet" href="{% static 'blog/css/homestyle.css' %}"/>
+        <link rel="stylesheet" href="{% static 'blog/css/responsive.css' %}"/>
+        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}"/>
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+        <style>
+        body {
+	background-image: url("/static/blog/images/yoyo.jpg");
+}
+        </style>
+    <meta charset="UTF-8">
+    <title>jQuery Add Read More Link</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var maxLength = 300;
+        $(".show-read-more").each(function(){
+            var myStr = $(this).text();
+            if($.trim(myStr).length > maxLength){
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append(' <a href="javascript:void(0);" class="read-more">read more...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function(){
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+    </script>
+    <style type="text/css">
+        .show-read-more .more-text{
+            display: none;
+        }
+    </style>
+    </head>
+    {% if user.is_authenticated %}
+    <button class="btn btn-outline-info"><a href="{% url 'blog:create_post' %}">Add a New Post</a></button>
+    <br>
+    {% endif %} 
+<body>
+    <section class="contact-page">
+    <div class="container">
+
+        <!-- Show this section only for User Blog view -->
+        {% if first_name or last_name %}
+
+        <div class="slider">
+                <div class="display-table  center-text">
+                    <h1 class="title display-table-cell"><b>{{ first_name }} {{ last_name }} - Blog</b></h1>
+                </div>
+            </div><!-- slider -->
+        {% endif %}
+
+
+        <center><h4 style="font-family: 'Pacifico', cursive;">BLOG POSTS</h4></center>
+        <br>
+        {% for post in posts %}
+        <div class="col-md-12" style="padding-left: 2%">
+                
+                <div class="card h-100">
+                    <div class="single-post post-style-2">
+
+                        <div class="blog-image"><img src="{{ post.cover.url}}" alt="Blog Image" style="padding:5px 5px 5px 5px;"></div>
+
+                        <div class="blog-info">
+
+                            <h4 class="title"><a href="{% url 'blog:post' post.pk %}"><b>{{ post.title }}</b></a></h4>
+
+                            <p>{{ post.body|slice:":500" }}</p>
+                            <a href="{% url 'blog:post' post.pk %}" class="btn btn-outline-info">Read More </a>
+                            <div class="avatar-area">
+                                <a class="avatar" href="#"><img src="{% static 'blog/images/user.png' %}" alt="Profile Image"></a>
+                                <div class="right-area">
+                                    <a class="name" href="{% url 'blog:user_posts' post.user.username %}"><b>Posted by {{ post.user.username }}</b></a>
+                                    <h6 class="date" href="#">{{ post.pub_date }}</h6>
+                                </div>
+                            </div>
+
+                            <ul class="post-footer">
+                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>{{post.comment_count}}</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{post.view_count}}</a></li>
+                            </ul>
+
+                        </div><!-- blog-right -->
+
+                    </div><!-- single-post extra-blog -->
+
+                </div><!-- card -->
+            </div><!-- col-lg-8 col-md-12 -->
+<br>{% endfor %}
+        <!-- Pagination -->
+        <div class="pagination">
+            <ul class="pagination">
+            {% if posts.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a>
+                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">previous</a></li>
+            {% endif %}
+            <br>
+            <div class="pagination">
+            {% if posts.paginator.num_pages != 1 %}
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            {% endif %}
+            </div>
+            <br>
+            {% if posts.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">next</a>
+                <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">last &raquo;</a></li>
+            {% endif %}
+        </ul>
+        </div>
+
+    </div>
+</section>
+</body>
+{% endblock content %}

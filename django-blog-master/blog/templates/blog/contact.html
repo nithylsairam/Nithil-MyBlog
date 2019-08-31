@@ -1,0 +1,101 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blog Navbar and Footer</title>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"/>
+    
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/slicknav.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/owl.carousel.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/magnific-popup.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/animate.css' %}"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="{% static 'blog/css/style.css' %}"/>
+	<style>
+			body {
+		background-image: url("/static/blog/images/yoyo.jpg");
+	}
+			</style>
+</head>
+<body>
+	<!-- Contact page -->
+	<section class="contact-page">
+		<h4 style="background-color:white; text-align: center;">CONTACT NITHIL'S BLOG ADMIN</h4>
+		<br>
+		<div class="container">
+			<div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15545.308780126361!2d80.247638!3d13.078438!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9a1d093938cbc4c8!2siPRIMED+Education+Solutions+Private+Limited!5e0!3m2!1sen!2sin!4v1566149195594!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+			<div class="row">
+				<div class="col-lg-7 order-2 order-lg-1">
+					<form class="contact-form">
+						<input type="text" placeholder="Your name">
+						<input type="text" placeholder="Your e-mail">
+						<input type="text" placeholder="Subject">
+						<textarea placeholder="Message"></textarea>
+						<button class="site-btn">Send message<img src="{% static 'blog/img/icons/double-arrow.png' %}" alt="#"/></button>
+					</form>
+				</div>
+				<div class="col-lg-5 order-1 order-lg-2 contact-text text-white">
+					<h3>HEY USER!! Send any Queries to Admin here!</h3>
+					<p>If you want to ask any questions or give us any feedback, please feel free to Contact us.</p>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="{% static 'blog/img/icons/location.png' %}" alt=""></div>
+						<div class="ci-text">22,Talking Technologies, Kilpauk.</div>
+					</div>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="{% static 'blog/img/icons/phone.png' %}" alt=""></div>
+						<div class="ci-text">(+91) 99654 99654</div>
+					</div>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="{% static 'blog/img/icons/mail.png' %}" alt=""></div>
+						<div class="ci-text">info.blog@nithil.com</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Contact page end-->
+
+
+	<!-- Newsletter section -->
+	<section class="newsletter-section">
+		<div class="container">
+			<h2>Subscribe For getting Latest Updates from our Admin</h2>
+			<form class="newsletter-form">
+				<input type="text" placeholder="Your Email ID">
+				<button class="site-btn">Subscribe <img src="{% static 'blog/img/icons/double-arrow.png' %}" alt="#"/></button>
+			</form>
+		</div>
+	</section>
+	<!-- Newsletter section end -->
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+   integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+   crossorigin="anonymous"></script>
+</div>
+
+</body>
+<script src="{% static 'blog/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'blog/js/main.js' %}"></script>
+</html>
+{% endblock content %}
